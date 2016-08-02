@@ -1,0 +1,67 @@
+#!/bin/bash
+pushd .
+cd startcloud-ui
+cp custom.css            	/usr/local/lib/python2.7/dist-packages/static/dashboard/css/custom.css
+cp startcloud-UI.css        /usr/local/lib/python2.7/dist-packages/static/dashboard/css/
+cp horizon.pie.js        	/usr/local/lib/python2.7/dist-packages/static/horizon/js/horizon.pie.js
+cp *.png                 	/usr/local/lib/python2.7/dist-packages/static/dashboard/img/
+
+cp *.otf                  	/usr/local/lib/python2.7/dist-packages/static/dashboard/fonts/
+cp _stylesheets.html      	/usr/local/lib/python2.7/dist-packages/openstack_dashboard/templates/_stylesheets.html
+cp _scripts.html            /usr/local/lib/python2.7/dist-packages/openstack_dashboard/templates/_scripts.html
+cp _scripts.html            /usr/local/lib/python2.7/dist-packages/horizon/templates/horizon/
+
+
+cp _login.html           	/usr/local/lib/python2.7/dist-packages/horizon/templates/auth/_login.html
+cp project/images/templates/images/index.html         		/usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/project/images/templates/images/
+cp project/instances/templates/instances/index.html        	/usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/project/instances/templates/instances/ 
+cp admin/images/templates/images/index.html                	/usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/admin/images/templates/images/index.html
+cp admin/instances/templates/instances/index.html          	/usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/admin/instances/templates/instances/index.html 
+
+cp _workflow_step_update_members.html           /usr/local/lib/python2.7/dist-packages/horizon/templates/horizon/common/_workflow_step_update_members.html
+cp _accordion_nav.html  /usr/local/lib/python2.7/dist-packages/horizon/templates/horizon
+cp _data_table_row_action_dropdown.html /usr/local/lib/python2.7/dist-packages/horizon/templates/horizon/common
+cp tables.py /usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/project/instances/
+
+cp nova.py /usr/local/lib/python2.7/dist-packages/openstack_dashboard/api/
+
+cp views.py /usr/local/lib/python2.7/dist-packages/horizon/tables/
+cp project/instances/views.py /usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/project/instances/
+
+cp project/instances/forms.py /usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/project/instances/
+
+cp admin/instances/views.py /usr/local/lib/python2.7/dist-packages/openstack_dashboard/dashboards/admin/instances/
+
+cp jquery.js            /usr/local/lib/python2.7/dist-packages/static/horizon/lib/jquery/
+
+cp manage.py     /usr/local/lib/python2.7/dist-packages/django/conf/project_template/
+cp _header.html   /usr/local/lib/python2.7/dist-packages/openstack_dashboard/templates/ 
+cp horizon.scss  /usr/local/lib/python2.7/dist-packages/static/dashboard/scss/
+cp rickshaw.css   /usr/local/lib/python2.7/dist-packages/static/dashboard/css/
+cp datepicker3.css   /usr/local/lib/python2.7/dist-packages/static/horizon/lib/bootstrap_datepicker/
+cp horizon_charts.scss   /usr/local/lib/python2.7/dist-packages/static/dashboard/scss/
+cp horizon_workflow.scss   /usr/local/lib/python2.7/dist-packages/static/dashboard/scss/
+cp font-awesome.scss      /usr/local/lib/python2.7/dist-packages/static/horizon/lib/font-awesome/scss/
+
+cp django.po  /usr/local/lib/python2.7/dist-packages/openstack_dashboard/locale/zh_CN/LC_MESSAGES/
+    
+
+cd /usr/local/lib/python2.7/dist-packages/openstack_dashboard
+django-admin.py compilemessages
+
+
+cd  /usr/local/lib/python2.7/dist-packages/django/conf/project_template/
+python manage.py  compress
+
+cd  /usr/local/lib/python2.7/dist-packages/horizon/locale/zh_CN/LC_MESSAGES
+msgfmt --statistics --verbose -o django.mo django.po
+
+cd /usr/local/lib/python2.7/dist-packages/openstack_dashboard/locale/zh_CN/LC_MESSAGES/
+msgfmt --statistics --verbose -o django.mo django.po
+
+cd /root/startcloud-ui
+cp a5878f7901a6.js  /usr/local/lib/python2.7/dist-packages/static/dashboard/js/
+ 
+apachectl restart
+
+popd 

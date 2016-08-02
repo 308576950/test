@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Images" %}{% endblock %}
+
+{% block main %}
+  {{ table.render }}
+  
+<script>
+$(document).ready(function(){
+ $("table#images tr").find("td:eq(3)").each(function(){
+   var backgroundColor;
+   var wrapElement = "<p style=''></p>";
+   switch ($(this).text()){
+    case "Active":
+       backgroundColor = "#8BC63E";
+       break;
+    case "Deleted":
+       backgroundColor = "#F36A53";
+       break;
+    case "Shut off":
+       backgroundColor = "#F29028";
+       break;
+    case "Suspended":
+       backgroundColor = "#27B3AE";
+       break;
+   }
+   $(this).wrapInner(wrapElement);
+   $(this).find("p").css("background-color",backgroundColor);
+ });
+});
+</script>
+{% endblock %}

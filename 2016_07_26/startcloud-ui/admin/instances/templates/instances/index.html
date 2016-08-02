@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Instances" %}{% endblock %}
+
+{% block main %}
+    {{ table.render }}
+<script type='text/javascript'>
+$(document).ready(function(){
+ $("table#instances tr").find("td:eq(7)").each(function(){
+   var backgroundColor;
+   var wrapElement = "<p style=''></p>";
+   switch ($(this).text()){
+      case "Active":
+       backgroundColor = "#8BC63E";
+       break;
+    case "运行中":
+       backgroundColor = "#8BC63E";
+       break;
+    case "Error":
+       backgroundColor = "#F36A53";
+       break;
+    case "错误":
+       backgroundColor = "#F36A53";
+       break;
+    case "Migrating":
+       backgroundColor = "#F29028";
+       break;
+    case "正在迁移":
+       backgroundColor = "#F29028";
+       break;
+
+   }
+   $(this).wrapInner(wrapElement);
+   $(this).find("p").css("background-color",backgroundColor);
+ });
+});
+</script>
+{% endblock %}

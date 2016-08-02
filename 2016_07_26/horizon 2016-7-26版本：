@@ -1,0 +1,4 @@
+horizon 2016-7-21版本：
+
+主要完成了云主机翻页操作。
+思路：见网址https://review.openstack.org/#/c/289314/
