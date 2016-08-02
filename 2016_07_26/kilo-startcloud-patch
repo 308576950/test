@@ -1,4 +1,6 @@
 #!/bin/bash
+## test test
+
 pushd .
 cd startcloud-ui
 cp custom.css            	/usr/local/lib/python2.7/dist-packages/static/dashboard/css/custom.css
